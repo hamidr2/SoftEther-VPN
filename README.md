@@ -23,3 +23,89 @@ apt-get -y install build-essential wget make curl gcc  wget zlib1g-dev tzdata gi
 
 You can download the latest SoftEther server package for Linux from their website:
 [Download SoftEther](https://www.softether-download.com/en.aspx?product=softether)
+
+```
+Wget “download link”
+```
+
+
+```
+Tar xzf “downloaded file name”
+```
+
+```
+cd vpnserver
+```
+
+```
+make
+```
+
+
+```
+cd ..
+```
+
+
+```
+mv vpnserver /usr/local
+```
+
+```
+cd /usr/local/vpnserver/
+```
+
+
+```
+chmod 600 *
+chmod 700 vpnserver vpncmd
+```
+
+
+```
+./vpnserver start
+```
+
+```
+./vpncmd
+```
+
+```
+ServerPasswordSet
+```
+
+
+```
+sudo cat >> /lib/systemd/system/vpnserver.service << EOF
+[Unit]
+Description=SoftEther VPN Server
+After=network.target
+[Service]
+Type=forking
+ExecStart=
+ExecStart=/usr/local/vpnserver/vpnserver start
+ExecStop=/usr/local/vpnserver/vpnserver stop
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+
+```
+echo net.ipv4.ip_forward = 1 | ${SUDO} tee -a /etc/sysctl.conf
+```
+
+
+```
+systemctl enable vpnserver
+systemctl start vpnserver
+systemctl status vpnserver
+```
+
+```
+ufw allow 443
+ufw allow 500,4500/udp
+ufw allow 1701
+ufw allow 1194
+ufw allow 5555
+```

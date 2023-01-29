@@ -35,28 +35,14 @@ Tar xzf “downloaded file name”
 
 ```
 cd vpnserver
-```
-
-```
 make
 ```
 
 
 ```
 cd ..
-```
-
-
-```
 mv vpnserver /usr/local
-```
-
-```
 cd /usr/local/vpnserver/
-```
-
-
-```
 chmod 600 *
 chmod 700 vpnserver vpncmd
 ```
@@ -70,6 +56,7 @@ chmod 700 vpnserver vpncmd
 ./vpncmd
 ```
 
+Now your VPN server has been created and it’s ready. One last step is to change the Authentication mode to Password since that’s how we configured our user’s authentication mode in the server:
 ```
 ServerPasswordSet
 ```
@@ -95,6 +82,7 @@ EOF
 echo net.ipv4.ip_forward = 1 | ${SUDO} tee -a /etc/sysctl.conf
 ```
 
+Then start the VPN client service using the following command:
 
 ```
 systemctl enable vpnserver

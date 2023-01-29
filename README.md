@@ -47,6 +47,7 @@ chmod 600 *
 chmod 700 vpnserver vpncmd
 ```
 
+Then start the VPN client service using the following command:
 
 ```
 ./vpnserver start
@@ -82,7 +83,6 @@ EOF
 echo net.ipv4.ip_forward = 1 | ${SUDO} tee -a /etc/sysctl.conf
 ```
 
-Then start the VPN client service using the following command:
 
 ```
 systemctl enable vpnserver
